@@ -1,0 +1,18 @@
+.team-card {
+  width: fit-content;
+  max-width: fit-content;
+  margin: 10px 15px;
+}
+
+.team-logo {
+  width: 150px;
+  height: 150px;
+}
+
+.data-table {
+  border: 2px solid black;
+}
+
+.data-header {
+  border-bottom: 2px dashed black;
+}

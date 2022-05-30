@@ -1,0 +1,9 @@
+.teams-container {
+  max-width: fit-content;
+  max-height: fit-content;
+  margin: auto;
+  padding: 20px 0px;
+
+  display: flex;
+  flex-direction: row;
+}
