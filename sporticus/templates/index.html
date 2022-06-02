@@ -4,6 +4,13 @@
 
 {% block content %}
 <h1>
-Template Homepage
+NFL Teams
 </h1>
+<ul>
+ {% for key, value in data.items %}
+ <li>
+    {{key}}: {{value}}
+ </li>
+ {% endfor %}
+</ul>
 {% endblock %}
