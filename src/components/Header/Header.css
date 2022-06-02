@@ -1,0 +1,12 @@
+.topnav {
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  background-color: var(--gray_1);
+  display: inline-block;
+}
+
+.nav-link {
+  margin: 0 20px;
+  color: var(--crimson_1);
+}
