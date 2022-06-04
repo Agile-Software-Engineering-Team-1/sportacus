@@ -33,8 +33,11 @@ def buildTeamDict(teams, year) :
     team_list = []
     x = 1
     for team in teams:
-        team_dict[f"Team{x}"] = {"year":f"{year}", "abrv":f"{team.abbreviation}",
-        "name":f"{team.name}", "rushtd":f"{team.rush_touchdowns}"}
+        team_dict[f"{x}"] = {"year":f"{year}", "abrv":f"{team.abbreviation}",
+        "name":f"{team.name}", "rank":f"{team.rank}", "wins":f"{team.wins}", "losses":f"{team.losses}",
+        "winpcnt":f"{round((team.wins / team.games_played) * 100, 2)}", "passtd":f"{team.pass_touchdowns}", "rushtd":f"{team.rush_touchdowns}",
+        "tds":f"{team.pass_touchdowns + team.rush_touchdowns}", "yards":f"{team.yards}", "trnovs":f"{team.turnovers}",
+        "fmbls":f"{team.fumbles}", "ints":f"{team.interceptions}", "ydspplay":f"{team.yards_per_play}"}
         x += 1
     
     for team in team_dict.values():
