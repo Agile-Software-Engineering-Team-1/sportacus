@@ -25,5 +25,8 @@ yarn-error.log*
 #python cache files
 *.pyc
 
+#json files from 3rd party api
+sporticus/json-data/*.json
+
 # vscode
 .vscode/
