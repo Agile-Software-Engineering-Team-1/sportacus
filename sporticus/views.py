@@ -12,18 +12,25 @@ teams = Teams(year="2021")
 def buildTeamDict(teams, year) :
     json_file_path = os.path.join(json_dir,"nfl-teams.json")
     team_dict = {}
+    team_list = []
     x = 1
     for team in teams:
         team_dict[f"Team{x}"] = {"year":f"{year}", "abrv":f"{team.abbreviation}",
         "name":f"{team.name}", "rushtd":f"{team.rush_touchdowns}"}
         x += 1
     
+    for team in team_dict.values():
+        team_list.append(json.dumps(team, indent=4))
+
     #Remove old data each time this function is called
     if(os.path.exists(json_file_path)):
         os.remove(json_file_path)
     
     with open(json_file_path, 'w') as json_file:
-        json.dump(team_dict, json_file, indent=4)
+        json_file.write("[\n")
+        for team in team_list:
+            json_file.write(team + ",\n")
+        json_file.write("]")
 
     return team_dict
 
