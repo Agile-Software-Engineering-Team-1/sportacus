@@ -4,7 +4,7 @@ from sportsipy.nfl.teams import Teams
 import json
 import os
 
-json_dir = "json-data/"
+json_dir = "sporticus/json-data/"
 teams = Teams(year="2021")
 
 #Takes in a list of the sports teams and the year (which season team data is from)
