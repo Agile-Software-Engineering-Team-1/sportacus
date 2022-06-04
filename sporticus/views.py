@@ -7,6 +7,24 @@ import os
 json_dir = "sporticus/json-data/"
 teams = Teams(year="2021")
 
+#Takes in the file (full path) and the list of json data
+#Writes the contents of the list to the .json file formatted properly for React to read
+# ** This function WILL create the file if it does NOT exist **
+def writeJsonToFile(json_file_path, json_list):
+    with open(json_file_path, 'w') as json_file:
+
+        json_file.write("[\n")
+        for x in range(len(json_list)):
+
+            json_file.write(json_list[x])
+
+            if(x != len(json_list) - 1):
+                json_file.write(",")
+
+            json_file.write("\n")
+
+        json_file.write("]")
+
 #Takes in a list of the sports teams and the year (which season team data is from)
 #Builds and returns a dictionary containing the teams and desired statistics
 def buildTeamDict(teams, year) :
@@ -26,11 +44,7 @@ def buildTeamDict(teams, year) :
     if(os.path.exists(json_file_path)):
         os.remove(json_file_path)
     
-    with open(json_file_path, 'w') as json_file:
-        json_file.write("[\n")
-        for team in team_list:
-            json_file.write(team + ",\n")
-        json_file.write("]")
+    writeJsonToFile(json_file_path, team_list)
 
     return team_dict
 
