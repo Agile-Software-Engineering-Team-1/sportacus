@@ -3,6 +3,7 @@ from django.template import loader
 from sportsipy.nfl.teams import Teams
 import json
 import os
+import argparse
 
 json_dir = "sporticus/json-data/"
 teams = Teams(year="2021")
@@ -11,6 +12,9 @@ teams = Teams(year="2021")
 #Writes the contents of the list to the .json file formatted properly for React to read
 # ** This function WILL create the file if it does NOT exist **
 def writeJsonToFile(json_file_path, json_list):
+    if(os.path.splitext(json_file_path)[-1].lower() != ".json"):
+        raise argparse.ArgumentTypeError("Not a json file! The first arg must be of type *.json")
+        
     with open(json_file_path, 'w') as json_file:
 
         json_file.write("[\n")
@@ -47,7 +51,10 @@ def buildTeamDict(teams, year) :
     if(os.path.exists(json_file_path)):
         os.remove(json_file_path)
     
-    writeJsonToFile(json_file_path, team_list)
+    try:
+        writeJsonToFile(json_file_path, team_list)
+    except argparse.ArgumentTypeError as e:
+        print(e)
 
     return team_dict
 
