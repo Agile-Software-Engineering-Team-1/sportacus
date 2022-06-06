@@ -6,6 +6,9 @@ import os
 import argparse
 
 json_dir = "sporticus/json-data/"
+if(not os.path.exists(json_dir)):
+    os.mkdir(json_dir)
+
 teams = Teams(year="2021")
 
 #Takes in the file (full path) and the list of json data
