@@ -22,7 +22,17 @@ class StatsComponent extends Component {
             <tr key={teamStats.name}>
               <td>{teamStats.name}</td>
               <td>{teamStats.abrv}</td>
+              <td>{teamStats.wins}</td>
+              <td>{teamStats.losses}</td>
+              <td>{teamStats.winpcnt}</td>
+              <td>{teamStats.tds}</td>
               <td>{teamStats.rushtd}</td>
+              <td>{teamStats.passtd}</td>
+              <td>{teamStats.yards}</td>
+              <td>{teamStats.trnovs}</td>
+              <td>{teamStats.fmbls}</td>
+              <td>{teamStats.ints}</td>
+              <td>{teamStats.ydspplay}</td>
             </tr>
           )
         })
@@ -32,8 +42,18 @@ class StatsComponent extends Component {
               <thead>
                 <tr>
                   <th>Team</th>
-                  <th>Abbr.</th>
+                  <th>Abrv</th>
+                  <th>Wins</th>
+                  <th>Losses</th>
+                  <th>Win %</th>
+                  <th>Touch Downs</th>
                   <th>Rushing TDs</th>
+                  <th>Passing TDs</th>
+                  <th>Yards</th>
+                  <th>Turnovers</th>
+                  <th>Fumbles</th>
+                  <th>Interceptions</th>
+                  <th>Yards/Play</th>
                 </tr>
               </thead>
               <tbody>
