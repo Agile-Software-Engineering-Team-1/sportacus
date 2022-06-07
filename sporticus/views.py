@@ -7,7 +7,7 @@ import argparse
 
 json_dir = "sporticus/json-data/"
 if(not os.path.exists(json_dir)):
-    os.mkdir(json_dir)
+    os.makedirs(json_dir)
 
 teams = Teams(year="2021")
 
