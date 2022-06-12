@@ -7,13 +7,15 @@ from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer
 
 
 class ObtainTokenPairWithTeamView(TokenObtainPairView):
+    permission_classes = (permissions.AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
 
 
 class CustomUserCreate(APIView):
+    print("BEGIN CUSTOM USER CREATE")
     permission_classes = (permissions.AllowAny,)
-
     def post(self, request, format='json'):
+        print("BEGIN CUSTOM USER CREATE POST")
         serializer = CustomUserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
