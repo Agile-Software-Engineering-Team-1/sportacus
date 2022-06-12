@@ -30,7 +30,7 @@ function Header() {
       <a className='nav-link' href="/Contact">Contact</a>
       <a className='nav-link' href="/About">About</a>
       <a className='nav-link' href="/LoginPage">Login</a>
-      <a className='nav-link' href="/Signup">Signup</a> //todo signup jsx
+      <a className='nav-link' href="/Signup">Signup</a>
       </fragment>
          )}
     </nav>
