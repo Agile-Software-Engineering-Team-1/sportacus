@@ -1,14 +1,14 @@
 import { getValue } from "@testing-library/user-event/dist/utils";
 import React from "react";
 import { Dropdown, Selection } from 'react-dropdown-now';
-import './DropDown.css';
+import './Dropdown.css';
 
 /**
- * DropDownTeam - Provides a dropdown selection of team names.
+ * DropdownTeam - Provides a Dropdown selection of team names.
  * @param {Properties} props statFile - json file containing stats, value - Current value string 
- * @returns {string} value - The selected value from the dropdown.
+ * @returns {string} value - The selected value from the Dropdown.
  */
-function DropDownTeam (props) {
+function DropdownTeam (props) {
     var data = props.statFile;
 
     var nameList = []
@@ -20,7 +20,7 @@ function DropDownTeam (props) {
     nameList.push("All");
 
     return (
-    <div className="DropDownTeam">
+    <div className="DropdownTeam">
         <Dropdown
         baseClassName="rdn"
         arrowClosed={<span className="arrow-closed">-</span>}
@@ -38,5 +38,5 @@ function DropDownTeam (props) {
     )
 }
 
-export default DropDownTeam;
+export default DropdownTeam;
 
