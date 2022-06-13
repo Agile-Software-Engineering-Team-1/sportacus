@@ -7,7 +7,7 @@ function Header() {
 // The following code is used to tell if a user is logged in
   const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {
-    if (localStorage.getItem('token') !== null) {
+    if (localStorage.getItem('access_token') !== null) {
       setIsAuth(true);
     }
   }, []);

@@ -1,83 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import './view.css';
+import React, { Component } from "react";
+import axiosInstance from "../../axiosApi";
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState(false);
-  const [loading, setLoading] = useState(true);
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {username: "", password: ""};
 
-  useEffect(() => {
-    if (localStorage.getItem('token') !== null) {
-      window.location.replace('http://localhost:3000/Stats');
-    } else {
-      setLoading(false);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmitWThen = this.handleSubmitWThen.bind(this);
     }
-  }, []);
 
-  const onSubmit = e => {
-    e.preventDefault();
+    handleChange(event) {
+        this.setState({[event.target.name]: event.target.value});
+    }
 
-    const user = {
-      email: email,
-      username: "admin",
-      password: password
-    };
+    handleSubmitWThen(event){
+        event.preventDefault();
+        axiosInstance.post('/token/obtain/', {
+                username: this.state.username,
+                password: this.state.password
+            }).then(
+                result => {
+                    axiosInstance.defaults.headers['Authorization'] = "JWT " + result.data.access;
+                    localStorage.setItem('access_token', result.data.access);
+                    localStorage.setItem('refresh_token', result.data.refresh);
+                }
+            ).catch (error => {
+                throw error;
+            })
+    }
 
-    fetch('http://127.0.0.1:8000/api/token/obtain/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-    window.alert("JSON Data Send:" + JSON.stringify(user))
-      .then(res => res.json())
-      .then(data => {
-        if (data.key) {
-          window.alert("Success!")
-          localStorage.clear();
-          localStorage.setItem('token', data.key);
-          window.location.replace('http://localhost:3000/Stats');
-        } else {
-          window.alert("Error!")
-          setEmail('');
-          setPassword('');
-          localStorage.clear();
-          setErrors(true);
+    async handleSubmit(event) {
+        event.preventDefault();
+        try {
+            const response = await axiosInstance.post('/token/obtain/', {
+                username: this.state.username,
+                password: this.state.password
+            });
+            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+            window.alert("Success. Redirecting to Stats page.")
+            window.location.replace('http://localhost:3000/Stats');
+            return response;
+        } catch (error) {
+            throw error;
         }
-      });
-  };
+    }
 
-  return (
-    <div>
-      {loading === false && <h1>Login</h1>}
-      {errors === true && <h2>Cannot log in with provided credentials</h2>}
-      {loading === false && (
-        <form onSubmit={onSubmit}>
-          <label htmlFor='email'>Email address:</label> <br />
-          <input
-            name='email'
-            type='email'
-            value={email}
-            required
-            onChange={e => setEmail(e.target.value)}
-          />{' '}
-          <br />
-          <label htmlFor='password'>Password:</label> <br />
-          <input
-            name='password'
-            type='password'
-            value={password}
-            required
-            onChange={e => setPassword(e.target.value)}
-          />{' '}
-          <br />
-          <input type='submit' value='Login' />
-        </form>
-      )}
-    </div>
-  );
-};
-
+    render() {
+        return (
+            <div>
+                Login
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Username:
+                        <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                        Password:
+                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
+                    </label>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        )
+    }
+}
 export default Login;

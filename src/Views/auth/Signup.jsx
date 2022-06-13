@@ -27,6 +27,8 @@ class Signup extends Component{
                 email: this.state.email,
                 password: this.state.password
             });
+            window.alert("Success. Redirecting to Login page.")
+            window.location.replace('http://localhost:3000/Login');
             return response;
         } catch (error) {
             console.log(error.stack);
