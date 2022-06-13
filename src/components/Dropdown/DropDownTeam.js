@@ -12,10 +12,12 @@ function DropDownTeam (props) {
     var data = props.statFile;
 
     var nameList = []
+    var abrvList = []
     for (var i = 0; i < data.length; ++i) {
-      nameList.push(data[i].name);
+      nameList.push(data[i].abrv + " | " + data[i].name);
     }
-    nameList.push("(All Available)");
+    nameList.sort()
+    nameList.push("All");
 
     return (
     <div className="DropDownTeam">
@@ -28,7 +30,7 @@ function DropDownTeam (props) {
         options={nameList}
         menu="div"
         value={props.changeValue}
-        onChange={(value) => props.changeValue(value.label)}
+        onChange={(value) => props.changeValue(value.label.split(' ')[0])}
         onClose={function noRefCheck(){}}
         onOpen={function noRefCheck(){}}
     />

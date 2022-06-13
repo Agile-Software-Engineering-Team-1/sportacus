@@ -1,9 +1,6 @@
-.rdn {
+.DropDownTeam {
     position: relative;
-}
-
-div {
-    display: block;
+    display: inline;
 }
 
 .rdn-control {

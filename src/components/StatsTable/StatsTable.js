@@ -1,28 +1,28 @@
 import React from "react";
-import './StatsComponent.css';
+import './StatsTable.css';
 
 /**
- * StatsComponent
+ * StatsTable
  * Pass in team name and stats json file using the following notation in the react js object that is calling this component.
- *  ---- StatsComponent teamName="<team name or leave empty string>" statFile={StatData}
+ *  ---- StatsTable teamAbrv="<team abrv or leave empty string>" statFile={StatData}
  *  ---- importing the StatData in other js object -> import StatData from "./json-data/nfl-teams.json";
  * @param {Properties} props statFile - json file containing stats, teamName - Name of team used in filtering
  * @returns Stat Table - Table of stats provided by the json file
  *  ---- The stat table is dynamic.  It will adjust to any properly formatted json.
- * Styled using StatsComponent.css.
+ * Styled using StatsTable.css.
  */
-function StatsComponent(props) {
+function StatsTable(props) {
 
  var data = props.statFile;
- var team = props.teamName;
+ var abrv = props.teamAbrv;
  var keyList = Object.keys(data[0]);
  var headerList = keyList.map((key, index)=>{
     return <th key={key}>{key.toUpperCase()}</th>
     })
-    console.log(team);
+    console.log(abrv);
     let tbData = data.filter((teamStats)=> {
-    if (team !== null & team !== "(All Available)" & team !== "Selection") {
-      if (teamStats.name.toString().toLocaleLowerCase() === team.toString().toLocaleLowerCase()) {
+    if (abrv !== null & abrv !== "All" & abrv !== "Selection") {
+      if (teamStats.abrv.toString().toLocaleLowerCase() === abrv.toString().toLocaleLowerCase()) {
        return teamStats
       }
     }
@@ -63,4 +63,4 @@ function getTDList(stats,keyList) {
   return(arr)
 }
 
-export default StatsComponent;
+export default StatsTable;
