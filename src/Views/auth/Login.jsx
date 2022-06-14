@@ -5,10 +5,14 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {username: "", password: ""};
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitWThen = this.handleSubmitWThen.bind(this);
+        if (localStorage.getItem('access_token') !== null){
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            window.alert("Logged out!")
+        }
     }
 
     handleChange(event) {

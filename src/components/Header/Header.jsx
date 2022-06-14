@@ -22,7 +22,7 @@ function Header() {
       <a className='nav-link' href="/Stats">Home</a>
       <a className='nav-link' href="/Contact">Contact</a>
       <a className='nav-link' href="/About">About</a>
-      <a className='nav-link' href="/Logout">Logout</a>
+      <a className='nav-link' href="/Logout">Change User</a>
           </Fragment>
             ) : (
     <fragment>
