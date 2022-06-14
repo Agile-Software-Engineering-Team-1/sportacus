@@ -10,9 +10,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
-        token['fav_nfl'] = user.fav_nfl
-        token['fav_nba'] = user.fav_nba
+        token['fav_color'] = user.fav_color
         return token
+
+
 class CustomUserSerializer(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
@@ -20,8 +21,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True
     )
-    username = serializers.CharField()
-    password = serializers.CharField(min_length=8, write_only=True)
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(min_length=8, write_only=True, required=True)
 
     class Meta:
         model = CustomUser
