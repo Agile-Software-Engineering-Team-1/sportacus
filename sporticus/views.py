@@ -118,4 +118,14 @@ def buildNflSchedule(team_abrvs, year):
 
 def index(request):
     template = loader.get_template("index.html")
-    return HttpResponse(template.render({ "team_data" : buildTeamDict(teams, last_season), "scheds": buildNflSchedule(team_abrvs, last_season)}, request))
+    return HttpResponse(template.render({ "team_data" : buildTeamDict(teams, last_season)}, request))
+
+def renderNflTeamSchedule(request, abbrv):
+    template = loader.get_template("index.html")
+    
+    team_abbrv = [abbrv.strip().upper()]
+    if(team_abbrv[0] not in team_abrvs):
+        print("Error: Team - " + team_abbrv[0] + " not found in nfl teams.")
+        return HttpResponse(template.render({}, request))
+        
+    return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, last_season)}, request))
