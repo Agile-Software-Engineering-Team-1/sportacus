@@ -4,10 +4,15 @@ from sportsipy.nfl.teams import Teams
 from sportsipy.nfl.schedule import Schedule
 import json
 import os
-from datetime import date
+from datetime import datetime, date
 import argparse
 
 last_season = str(int(date.today().year) - 1)
+nfl_season_start = datetime(date.today().year, 9, 9)
+#If today's date is AFTER the start of the NFL season, set the default year to THIS season
+if(datetime(date.today()) >= nfl_season_start):
+    last_season = str(int(date.today().year))
+
 json_dir = "sporticus/json-data/"
 if(not os.path.exists(json_dir)):
     os.makedirs(json_dir)
