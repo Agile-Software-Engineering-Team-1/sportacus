@@ -1,4 +1,3 @@
-//import React from "react";
 import "./StatsContainer.css"
 import React, { useState } from 'react';
 import StatsTable from '../StatsTable/StatsTable';
@@ -10,13 +9,9 @@ import StatDataNFL from "../../json-data/nfl-teams.json";
 import ScheduleDataNFL from "../../json-data/nfl-schedules.json";
 import StatDataNCAAF from "../../json-data/ncaaf-teams.json";
 import ScheduleDataNCAAF from "../../json-data/ncaaf-schedules.json";
-//import LogoNFL from "../../assets/nfl-logo.png";
-//import LogoNCAA from "../../assets/ncaa-logo";
-
 
 var StatData = null;
 var ScheduleData = null;
-//var SportLogo = LogoNFL;
 
 function StatsContainer(props) {
   
@@ -24,21 +19,21 @@ function StatsContainer(props) {
   const [valueSport, setValue2] = useState("NFL");
   const [valueYear, setValue3] = useState("2021");
 
-  //fetch(`http://127.0.0.1/${valueSport}/${valueTeam}/${valueYear}/`)
+  // Fetch Call that interacts with backend to update JSON files based on user selection.
+  // Called every time a useState item is updated.
+  // Needs to be tested.
+  // fetch(`http://127.0.0.1/${valueSport}/${valueTeam}/${valueYear}/`)
   
   if (valueSport === "NFL") {
     StatData = StatDataNFL;
     ScheduleData = ScheduleDataNFL;
-    //SportLogo = LogoNFL
   } else if (valueSport === "NCAAF") {
     StatData = StatDataNCAAF;
     ScheduleData = ScheduleDataNCAAF;
-    //SportLogo = LogoNCAA
   }
 
   return (
     <div className="stats-container">
-        {/* <img src={SportLogo} alt="Sport Logo" class="stats-img"/> */}
       <div className="childSC">
         <DropdownSport changeValue={(valueSport, valueTeam) => (setValue2(valueSport), setValue1(valueTeam))} />
         <DropdownTeam statFile={StatData} changeValue={valueTeam => setValue1(valueTeam)}/>

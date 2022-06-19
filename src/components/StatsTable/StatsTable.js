@@ -3,12 +3,12 @@ import './StatsTable.css';
 
 /**
  * StatsTable
- * Pass in team name and stats json file using the following notation in the react js object that is calling this component.
- *  ---- StatsTable teamAbrv="<team abrv or leave empty string>" statFile={StatData}
- *  ---- importing the StatData in other js object -> import StatData from "./json-data/nfl-teams.json";
- * @param {Properties} props statFile - json file containing stats, teamName - Name of team used in filtering
+ * @param {Properties} props 
+ *  - statFile, JSON file containing stats
+ *  - teamAbrv, Team abrv used in filtering
+ *  - teamYear, Year used in filter
  * @returns Stat Table - Table of stats provided by the json file
- *  ---- The stat table is dynamic.  It will adjust to any properly formatted json.
+ *  - The stat table is dynamic.  It will adjust to any properly formatted json for team statistcs.
  * Styled using StatsTable.css.
  */
 function StatsTable(props) {
