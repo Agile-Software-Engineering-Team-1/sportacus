@@ -1,5 +1,5 @@
 import React from "react";
-import './StatsTable.css';
+import './ScheduleTable.css';
 
 /**
  * StatsTable
@@ -11,43 +11,40 @@ import './StatsTable.css';
  *  ---- The stat table is dynamic.  It will adjust to any properly formatted json.
  * Styled using StatsTable.css.
  */
-function StatsTable(props) {
+function ScheduleTable(props) {
 
- var statData = props.statFile;
- var abrv = props.teamAbrv;
- var year = props.teamYear;
-
-  if(props.statFile === null | statData.length == 0) {
+  var abrv = props.teamAbrv;
+  var year = props.teamYear;
+  var schdata = props.statFile[0].games;
+  var abrvData = props.statFile[0].team;
+  
+  if(props.statFile === null | schdata.length == 0) {
     return(noDataResoponse("Data Not Available"))
   } else if (abrv === null | abrv === "" | abrv === "Team Selection") {
     return(noDataResoponse("Awaiting Team Selection"))
   } else {
 
-    let dataFilterYear = statData.filter((teamStats) => (teamStats.year === year) )
-    if (dataFilterYear.length === 0) {
-      return(noDataResoponse("Data Not Available For This Year"))
-    }
+  let dataFilterYear = schdata.filter((teamSchedules) => (teamSchedules.year === year & abrvData === abrv) )
+  if (dataFilterYear.length === 0) {
+    return(noDataResoponse("Data Not Available For This Year"))
+  } else {
 
-    let dataFilterAbrv = dataFilterYear.filter((teamStats) => (teamStats.abrv === abrv) )
-    if (dataFilterAbrv.length === 0) {
-      return(noDataResoponse("Data Not Available For This Year"))
-    } else {
 
-      var keyList = Object.keys(dataFilterAbrv[0]);
+
+      var keyList = Object.keys(dataFilterYear[0]);
       var headerList = keyList.map((key, index)=>{
-        return <th key={key}>{key.toUpperCase()}</th>
+      return <th key={key}>{key.toUpperCase()}</th>
       })
-
-
-      let tbData = dataFilterAbrv.map((teamStats)=>{
+      
+      let tbData = dataFilterYear.map((teamSchedules)=>{
         return (
-        <tr key={teamStats.name}>
-          {getTDList(teamStats,keyList)}
+        <tr key={teamSchedules.team}>
+          {getTDList(teamSchedules,keyList)}
         </tr>
         )
       })
       return (
-        <div className="ContainerStatsTable">
+        <div className="ContainerST">
           <table>
             <thead>
             <tr>{headerList}</tr>
@@ -55,17 +52,16 @@ function StatsTable(props) {
             <tbody> {tbData} </tbody>
           </table>
         </div>
-    )}
+    )
   }
 }
-
 
 /**
  * noDataResoponse
  * @param {String} response 
- * @returns A Html block containing the response
+ * @returns A html block containing the response
  */
- function noDataResoponse(response) {
+function noDataResoponse(response) {
   return (
     <div className="ContainerNoData">
       <h1 style={{textAlign: 'center'}}>{response}</h1>
@@ -87,5 +83,6 @@ function getTDList(stats,keyList) {
   } 
   return(arr)
 }
+}
 
-export default StatsTable;
+export default ScheduleTable;

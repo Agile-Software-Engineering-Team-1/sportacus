@@ -11,13 +11,16 @@ import './Dropdown.css';
 function DropdownTeam (props) {
     
     var data = props.statFile;
-    var nameList = []
-    for (var i = 0; i < data.length; ++i) {
-      if (!nameList.includes(data[i].abrv + " | " + data[i].name)) {
-        nameList.push(data[i].abrv + " | " + data[i].name);
+
+    var YearList = ["2020", "2021", "2022", "2023"]
+    /* for (var i = 0; i < data[0].games.length; ++i) {
+      var year = data[0].games[i].year
+      if (!YearList.includes(year)) {
+        YearList.push(year);
       }
     }
-    nameList.sort()
+    YearList.sort() */
+
     return (
     <div className="Dropdown">
         <Dropdown 
@@ -25,10 +28,10 @@ function DropdownTeam (props) {
         arrowClosed={<span className="arrow-closed">-</span>}
         arrowOpen={<span className="arrow-opened">🠋</span>}
         matcher={function noRefCheck(){}}
-        placeholder="Team Selection"
-        options={nameList}
+        placeholder="2021"
+        options={YearList}
         menu="div"
-        onChange={(value) => props.changeValue(value.label.split(' ')[0])}
+        onChange={(value) => props.changeValue(value.label)}
         onClose={function noRefCheck(){}}
         onOpen={function noRefCheck(){}}
     />

@@ -1,39 +1,15 @@
-import React, { useState, useEffect, Fragment }  from 'react';
+import React from 'react';
 import "./Header.css";
-import { Link } from 'react-router-dom';
+import logo from '../../assets/sportacus_temp_logo.svg';
 
 function Header() {
 
-// The following code is used to tell if a user is logged in
-  const [isAuth, setIsAuth] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem('access_token') !== null) {
-      setIsAuth(true);
-    }
-  }, []);
-// End
-
-
   return (
-    <nav className="topnav">
-      {isAuth === true ? (
-          <Fragment>
-            {' '}
-      <a className='nav-link' href="/Stats">Home</a>
-      <a className='nav-link' href="/Contact">Contact</a>
-      <a className='nav-link' href="/About">About</a>
-      <a className='nav-link' href="/Logout">Change User</a>
-          </Fragment>
-            ) : (
-    <fragment>
-      <a className='nav-link' href="/Stats">Home</a>
-      <a className='nav-link' href="/Contact">Contact</a>
-      <a className='nav-link' href="/About">About</a>
-      <a className='nav-link' href="/Login">Login</a>
-      <a className='nav-link' href="/Signup">Signup</a>
-      </fragment>
-         )}
-    </nav>
+    <div class="Header">
+        <div class="Logo">
+        <img width="75%" src={logo} alt="Sportacus Logo" class="img"/>
+        </div>
+    </div>
   );
 }
 
