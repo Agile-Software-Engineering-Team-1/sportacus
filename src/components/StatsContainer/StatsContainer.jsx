@@ -12,8 +12,14 @@ import ScheduleDataNCAAF from "../../json-data/ncaaf-schedules.json";
 
 var StatData = null;
 var ScheduleData = null;
+var currentTeam = "";
+var currentYear = "";
 
-function StatsContainer(props) {
+/**
+ * StatsContainer, Component (Page) that is responsible for maintaining the Team Stats and Schedule data tables.
+ * @returns HTML "Page" block that contains the Team Stats Table, Team Schedule Table and Selection Dropdowns for filtering data/stats
+ */
+function StatsContainer() {
   
   const [valueTeam, setValue1] = useState("Team Selection");
   const [valueSport, setValue2] = useState("NFL");
@@ -21,8 +27,10 @@ function StatsContainer(props) {
 
   // Fetch Call that interacts with backend to update JSON files based on user selection.
   // Called every time a useState item is updated.
-  // Needs to be tested.
   // fetch(`http://127.0.0.1/${valueSport}/${valueTeam}/${valueYear}/`)
+  if (valuesUpdated(valueTeam, valueYear)) {
+    fetch(`http://localhost:8000/${valueSport.toLowerCase()}/${valueTeam}/${Number(valueYear)}/`)
+  }
   
   if (valueSport === "NFL") {
     StatData = StatDataNFL;
@@ -45,6 +53,21 @@ function StatsContainer(props) {
       <div className="childSC"><ScheduleTable teamAbrv={valueTeam} teamYear={valueYear} statFile={ScheduleData}/></div>
     </div>
   );
+}
+
+/**
+ * valuesUpdated
+ * @param {String} valueTeam, Value of selected team 
+ * @param {String} valueYear, Value of selected year
+ * @returns Boolean, If an update of the team or year has been made.
+ */
+function valuesUpdated(valueTeam, valueYear) {
+  if ((valueTeam !== "Team Selection" & currentTeam !== valueTeam) | currentYear !== valueYear) {
+    currentTeam = valueTeam;
+    currentYear = valueYear;
+    return true;
+  }
+  return false;
 }
 
 export default StatsContainer;
