@@ -1,14 +1,15 @@
 import React from 'react';
 import "./Header.css";
+import logo from '../../assets/sportacus_temp_logo.svg';
 
 function Header() {
+
   return (
-    <nav className="topnav">
-      <a className='nav-link' href="/Stats">Home</a>
-      <a className='nav-link' href="/LoginPage">Login</a>
-      <a className='nav-link' href="/Contact">Contact</a>
-      <a className='nav-link' href="/About">About</a>
-    </nav>
+    <div class="Header">
+        <div class="Logo">
+        <img width="75%" src={logo} alt="Sportacus Logo" class="img"/>
+        </div>
+    </div>
   );
 }
 

@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+from django.contrib import admin
+from django.urls import path, include
+
 urlpatterns = [
     path('', views.index, name="index"),
     path('admin/', admin.site.urls),
-    path('api/', include('authentication.urls'))
+    path('api/', include('authentication.urls')),
+    path('nfl/<str:abbrv>/', views.renderNflTeamStatsAndSchedule, name="team_schedule"),
+    path('nfl/<str:abbrv>/<int:year>/', views.renderNflTeamStatsAndSchedule, name="team_schedule_with_year")
 ]
