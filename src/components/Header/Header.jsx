@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import "./Header.css";
 import logo from '../../assets/sportacus_temp_logo.svg';
 
 function Header() {
+  // The following code is used to tell if a user is logged in
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('access_token') !== null) {
+      setIsAuth(true);
+    }
+  }, []);
+  // End
 
   return (
     <div class="Header">
