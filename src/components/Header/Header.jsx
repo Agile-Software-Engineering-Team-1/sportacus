@@ -13,9 +13,9 @@ function Header() {
   // End
 
   return (
-    <div class="Header">
-      <div class="Logo">
-      <img width="75%" src={logo} alt="Sportacus Logo" class="img"/>
+    <div className='Header'>
+      <div className='Logo'>
+      <img width="75%" src={logo} alt="Sportacus Logo" className="img" />
       </div>
       <nav>
           {isAuth === true ? (
