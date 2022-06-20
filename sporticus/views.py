@@ -51,7 +51,7 @@ def buildTeamDict(teams, year) :
     team_list = []
     x = 1
     for team in teams:
-        team_dict[f"{x}"] = {"year":f"{year}", "abrv":f"{team.abbreviation}",
+        team_dict[f"{x}"] = {"season":f"{year}", "abrv":f"{team.abbreviation}",
         "name":f"{team.name}", "rank":f"{team.rank}", "wins":f"{team.wins}", "losses":f"{team.losses}",
         "winpcnt":f"{round((team.wins / team.games_played) * 100, 2)}", "passtd":f"{team.pass_touchdowns}", "rushtd":f"{team.rush_touchdowns}",
         "tds":f"{team.pass_touchdowns + team.rush_touchdowns}", "yards":f"{team.yards}", "trnovs":f"{team.turnovers}",
@@ -92,7 +92,7 @@ def buildTeamDictMultiYear(teams, year) :
         for season in range((year - 2), (year + 1)):
             team_stats = Team(team_name=team, year=season)
 
-            season_dict[f"{y}"] = {"year":f"{season}", "abrv":f"{team_stats.abbreviation}",
+            season_dict[f"{y}"] = {"season":f"{season}", "abrv":f"{team_stats.abbreviation}",
             "name":f"{team_stats.name}", "rank":f"{team_stats.rank}", "wins":f"{team_stats.wins}", "losses":f"{team_stats.losses}",
             "winpcnt":f"{round((team_stats.wins / team_stats.games_played) * 100, 2)}", "passtd":f"{team_stats.pass_touchdowns}", "rushtd":f"{team_stats.rush_touchdowns}",
             "tds":f"{team_stats.pass_touchdowns + team_stats.rush_touchdowns}", "yards":f"{team_stats.yards}", "trnovs":f"{team_stats.turnovers}",
