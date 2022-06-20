@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import StatDataNFL from '../../json-data/nfl-teams.json'
 import StatDataNCAAF from "../../json-data/ncaaf-teams.json";
 import DropdownTeam from '../Dropdown/DropdownTeam';
