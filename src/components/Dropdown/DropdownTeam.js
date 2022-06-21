@@ -1,6 +1,5 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
 import React from "react";
-import { Dropdown, Selection } from 'react-dropdown-now';
+import { Dropdown } from 'react-dropdown-now';
 import './Dropdown.css';
 
 /**
@@ -18,8 +17,7 @@ function DropdownTeam (props) {
       formattedTeamList.push(abrvList[i] + " | " + nameList[i]);
     }
     formattedTeamList.sort()
-
-    console.log(formattedTeamList);
+  
     return (
     <div className="Dropdown">
         <Dropdown 
