@@ -14,7 +14,7 @@ nfl_season_start = date(date.today().year, 9, 9)
 if(date.today() >= nfl_season_start):
     last_season = str(int(date.today().year))
 
-json_dir = "sporticus/json-data/"
+json_dir = "src/json-data/"
 if(not os.path.exists(json_dir)):
     os.makedirs(json_dir)
 
