@@ -10,14 +10,16 @@ import './Dropdown.css';
  */
 function DropdownTeam (props) {
     
-    var data = props.statFile;
-    var nameList = []
-    for (var i = 0; i < data.length; ++i) {
-      if (!nameList.includes(data[i].abrv + " | " + data[i].name)) {
-        nameList.push(data[i].abrv + " | " + data[i].name);
-      }
+    var formattedTeamList = [];
+    var abrvList = props.namesFile[0].abrv;
+    var nameList = props.namesFile[1].name;
+
+    for (var i = 0; i < abrvList.length; ++i) {
+      formattedTeamList.push(abrvList[i] + " | " + nameList[i]);
     }
-    nameList.sort()
+    formattedTeamList.sort()
+
+    console.log(formattedTeamList);
     return (
     <div className="Dropdown">
         <Dropdown 
@@ -26,7 +28,7 @@ function DropdownTeam (props) {
         arrowOpen={<span className="arrow-opened">🠋</span>}
         matcher={function noRefCheck(){}}
         placeholder="Team Selection"
-        options={nameList}
+        options={formattedTeamList}
         menu="div"
         onChange={(value) => props.changeValue(value.label.split(' ')[0])}
         onClose={function noRefCheck(){}}
