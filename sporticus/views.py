@@ -42,6 +42,34 @@ def writeJsonToFile(json_file_path, json_list):
 
         json_file.write("]")
 
+def buildNflNamesFile(teams) :
+    json_file_path = os.path.join(json_dir,"nfl-team-names.json")
+    team_dict = {}
+    team_list = []
+    abbrv_list = []
+    name_list = []
+
+    for team in teams:
+        name_list.append(team.name)
+        abbrv_list.append(team.abbreviation)
+        
+    team_dict["abbreviations"] = {"abrv":abbrv_list}
+    team_dict["names"] = {"name":name_list}
+
+    for team in team_dict.values():
+        team_list.append(json.dumps(team, indent=4))
+
+    #Remove old data each time this function is called
+    if(os.path.exists(json_file_path)):
+        os.remove(json_file_path)
+    
+    try:
+        writeJsonToFile(json_file_path, team_list)
+    except argparse.ArgumentTypeError as e:
+        print(e)
+
+buildNflNamesFile(teams)
+
 #Takes in a list of the sports teams and the year (which season team data is from)
 #Builds and returns a dictionary containing the teams and desired statistics
 #Writes the dictionary to a file in json format for displaying on the front end
