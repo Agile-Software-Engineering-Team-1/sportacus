@@ -10,6 +10,9 @@ function Header() {
     if (localStorage.getItem('access_token') !== null) {
       setIsAuth(true);
     }
+    // Uncommenting out the below code will display the current user's fav nfl/col team in an alert for debugging
+    // window.alert(localStorage.nfl);
+    // window.alert(localStorage.col);
   }, []);
 // End
 
