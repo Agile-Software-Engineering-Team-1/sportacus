@@ -1,11 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from sportsipy.nfl.teams import Teams
 from sportsipy.nfl.teams import Team
 from sportsipy.nfl.schedule import Schedule
 import json
 import os
-from datetime import datetime, date
+from datetime import date
 import argparse
 
 last_season = str(int(date.today().year) - 1)
@@ -211,17 +211,22 @@ def buildNflSchedule(team_abrvs, year):
 #View function to build the json data for all nfl teams
 #Triggered when the home page of the website is fetched -> http://127.0.0.1:8000
 def index(request):
-    template = loader.get_template("index.html")
-    return HttpResponse(template.render({ "team_data" : buildTeamDict(teams, last_season)}, request))
+    #template = loader.get_template("index.html")
+    #return HttpResponse(template.render({ "team_data" : buildTeamDict(teams, last_season)}, request))
+    data = [buildTeamDict(teams, last_season)]
+    return JsonResponse(data, safe=False)
 
 #View function to build the schedule and statistics for a requested team over the past 3 years
 #Triggered when the /nfl/<team_abbrv>/<year>/ endpoint is fetched -> http://127.0.0.1:8000/nfl/phi/2021
 def renderNflTeamStatsAndSchedule(request, abbrv, year=last_season):
-    template = loader.get_template("index.html")
+    #template = loader.get_template("index.html")
     
     team_abbrv = [abbrv.strip().upper()]
     if(team_abbrv[0] not in team_abrvs):
         print("Error: Team - " + team_abbrv[0] + " not found in nfl teams.")
-        return HttpResponse(template.render({}, request))
-        
-    return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year)}, request))
+        #return HttpResponse(template.render({}, request))
+        return JsonResponse([{}], safe=False)
+
+    data = [buildNflSchedule(team_abbrv, year), buildTeamDictMultiYear(team_abbrv, year)]
+    return JsonResponse(data, safe=False)
+    #return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year)}, request))

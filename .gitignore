@@ -27,6 +27,7 @@ yarn-error.log*
 
 #json files from 3rd party api
 sporticus/json-data/*.json
+src/json-data/*.json
 
 # sqlite
 *.sqlite3
