@@ -10,7 +10,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
-        token['fav_color'] = user.fav_color
         return token
 
 
