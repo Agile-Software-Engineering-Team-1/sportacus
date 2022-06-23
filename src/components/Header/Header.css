@@ -36,6 +36,11 @@
   list-style: none;
 }
 
+.button {
+  margin: 0 20px;
+  color: #FFFFFF;
+}
+
 .nav-link {
   margin: 0 20px;
   color: var(--crimson_1);
