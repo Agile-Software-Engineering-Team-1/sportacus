@@ -6,35 +6,40 @@ import './ScheduleTable.css';
  * @param {Properties} props 
  *  - statFile, JSON file containing stats
  *  - teamAbrv, Team abrv used in filtering
- *  - teamYear, Year used in filter
- * @returns Stat Table - Table of stats provided by the json file
+ *  - teamSeason, Season used in filter
+ * @returns Stat Table - Table of stats populated by the team schedules json file
  *  - The stat table is dynamic.  It will adjust to any properly formatted json for the team schedules.
  * Styled using ScheduleTable.css.
  */
 function ScheduleTable(props) {
 
   var abrv = props.teamAbrv;
-  var year = props.teamYear;
+  var season = props.teamSeason;
   var schdata = props.statFile[0].games;
   var abrvData = props.statFile[0].team;
   
-  if(props.statFile === null | schdata.length == 0) {
+  if(props.statFile === null | schdata.length === 0) {
     return(noDataResoponse("Data Not Available"))
   } else if (abrv === null | abrv === "" | abrv === "Team Selection") {
     return(noDataResoponse("Awaiting Team Selection"))
   } else {
 
-  let dataFilterYear = schdata.filter((teamSchedules) => (teamSchedules.year === year & abrvData === abrv) )
-  if (dataFilterYear.length === 0) {
-    return(noDataResoponse("Data Not Available For This Year"))
-  } else {
+    let dataFilterSeason = schdata.filter((teamSchedules) => (teamSchedules.season === season) )
+    if (dataFilterSeason.length === 0) {
+      return(noDataResoponse("Data Not Available For This Season"))
+    }
 
-      var keyList = Object.keys(dataFilterYear[0]);
+    let dataFilterAbrv = dataFilterSeason.filter((teamSchedules) => (abrvData === abrv) )
+    if (dataFilterAbrv.length === 0) {
+      return(noDataResoponse("Loading..."))
+    } else {
+
+      var keyList = Object.keys(dataFilterAbrv[0]);
       var headerList = keyList.map((key, index)=>{
       return <th key={key}>{key.toUpperCase()}</th>
       })
       
-      let tbData = dataFilterYear.map((teamSchedules)=>{
+      let tbData = dataFilterAbrv.map((teamSchedules)=>{
         return (
         <tr key={teamSchedules.team}>
           {getTDList(teamSchedules,keyList)}

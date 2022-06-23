@@ -1,6 +1,5 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
 import React from "react";
-import { Dropdown, Selection } from 'react-dropdown-now';
+import { Dropdown } from 'react-dropdown-now';
 import './Dropdown.css';
 
 /**
@@ -10,16 +9,8 @@ import './Dropdown.css';
  */
 function DropdownTeam (props) {
     
-    var data = props.statFile;
-
-    var YearList = ["2020", "2021", "2022", "2023"]
-    /* for (var i = 0; i < data[0].games.length; ++i) {
-      var year = data[0].games[i].year
-      if (!YearList.includes(year)) {
-        YearList.push(year);
-      }
-    }
-    YearList.sort() */
+    var SeasonList = ["2019", "2020", "2021", "2022"]
+    SeasonList.sort()
 
     return (
     <div className="Dropdown">
@@ -28,8 +19,8 @@ function DropdownTeam (props) {
         arrowClosed={<span className="arrow-closed">-</span>}
         arrowOpen={<span className="arrow-opened">🠋</span>}
         matcher={function noRefCheck(){}}
-        placeholder="2021"
-        options={YearList}
+        placeholder={SeasonList[2]}
+        options={SeasonList}
         menu="div"
         onChange={(value) => props.changeValue(value.label)}
         onClose={function noRefCheck(){}}
