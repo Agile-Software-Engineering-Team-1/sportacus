@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import "./Header.css";
 import logo from '../../assets/sportacus_temp_logo.svg';
+import "../../../node_modules/bootstrap/dist/css/bootstrap.css"
+
 
 function Header() {
   // The following code is used to tell if a user is logged in
@@ -20,17 +22,17 @@ function Header() {
       <nav>
           {isAuth === true ? (
             <ul className='main-nav'>
-              <li><a className='nav-link' href="/Stats">Home</a></li>
-              <li><a className='nav-link' href="/About">About</a></li>
-              <li className='push'><a className='nav-link' href="/Profile">Profile</a></li>
-              <li><a className='nav-link' href="/Logout">Logout</a></li>
+	      <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Stats';}}>Stats</button></li>
+              <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/About';}}>About</button></li>
+              <li className='push'><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Profile';}}>Profile</button></li>
+              <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Logout';}}>Logout</button></li>
             </ul>
           ) : (
             <ul className='main-nav'>
-              <li><a className='nav-link' href="/Stats">Home</a></li>
-              <li><a className='nav-link' href="/About">About</a></li>
-              <li className='push'><a className='nav-link' href="/Login">Login</a></li>
-              <li><a className='nav-link' href="/Signup">Sign Up</a></li>
+              <li><button class="outline-primary" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Stats';}}>Stats</button></li>
+              <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/About';}}>About</button></li>
+	      <li className='push'><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Login';}}>Login</button></li>
+	      <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Signup';}}>Sign Up</button></li>
             </ul>
           )}
       </nav>
