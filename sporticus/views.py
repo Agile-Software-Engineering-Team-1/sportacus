@@ -1,8 +1,10 @@
+import sqlite3
 from django.http import HttpResponse
 from django.template import loader
 from sportsipy.nfl.teams import Teams
 from sportsipy.nfl.teams import Team
 from sportsipy.nfl.schedule import Schedule
+from rest_framework.request import Request
 import json
 import os
 from datetime import datetime, date
@@ -225,3 +227,14 @@ def renderNflTeamStatsAndSchedule(request, abbrv, year=last_season):
         return HttpResponse(template.render({}, request))
         
     return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year)}, request))
+
+def getUserInfo(request, username):
+    u = username
+    try:
+        conn = sqlite3.connect('db.sqlite3')
+        cur = conn.cursor()
+        cur.execute("SELECT fav_nfl,fav_col FROM authentication_customuser WHERE username=?", (u,))
+        rows = cur.fetchall()
+    except:
+        return HttpResponse("There was an error. Username given: %s",username)
+    return HttpResponse(rows, request)
