@@ -27,7 +27,7 @@ const [details, setDetails] = useState({username: localStorage.username.substrin
             ChangeProfile(details);
         }
 const [nflTeam, setValue1] = useState(localStorage.nfl);
-const [colTeam, setValue2] = useState("Team Selection");
+const [colTeam, setValue2] = useState(localStorage.col);
 
     function ChangeProfile(details) {
         if(details.email == ""){
@@ -39,7 +39,7 @@ const [colTeam, setValue2] = useState("Team Selection");
         else{
         window.alert(nflTeam)
             const headers = { 'Content-Type': 'application/json' }
-                    fetch('http://127.0.0.1:8000/user/info/' + localStorage.username + details.email + '/' + nflTeam + '/' + details.fav_col, { headers })
+                    fetch('http://127.0.0.1:8000/user/info/' + localStorage.username + details.email + '/' + nflTeam + '/' + colTeam, { headers })
                     .then(response => response.text())
                     .then(data => {
                         window.alert(data);
@@ -63,13 +63,14 @@ const [colTeam, setValue2] = useState("Team Selection");
   return (
     <form onSubmit={submitHandler}>
     <div className="profile-info">
+    <center>
       <h1>Profile</h1>
       <label className='profile-item' htmlFor="username">Username: {localStorage.username.substring(0,localStorage.username.length-1)}</label>
       <label className= 'profile-item'> <text> Email: </text><input type="text" defaultValue = {details.email} name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})} vaule={details.email}/></label>
-      <label className='profile-item' ><text> Favorite NFL team: </text> </label>
-      <label className = 'profile-item'><DropdownTeam namesFile={nflTeamNames} changeValue={nflTeam => setValue1(nflTeam)}/> </label>
-      <label className='profile-item' ><text> Favorite NCAAF team: </text> <input type="text" defaultValue = {details.fav_col} name="fav_col" id="fav_col" onChange={e => setDetails({...details, fav_col: e.target.value})} vaule={details.fav_col}/></label>
+      <label className='profile-item' ><text> Favorite NFL team: </text> <DropdownTeam namesFile={nflTeamNames} changeValue={nflTeam => setValue1(nflTeam)}/> </label>
+      <label className='profile-item' ><text> Favorite NCAAF team: </text> <DropdownTeam namesFile={nflTeamNames} changeValue={colTeam => setValue2(colTeam)}/>  </label>
       <input className='profile-item-save' type="submit" value="UPDATE PROFILE" />
+    </center>
     </div>
     </form>
   );
