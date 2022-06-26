@@ -19,7 +19,7 @@ function Profile() {
     <div className="profile-info">
       <h1>Profile</h1>
       <label className='profile-item' htmlFor="username">Username: {localStorage.username.substring(0,localStorage.username.length-1)}</label>
-      <label className='profile-item' htmlFor='email'>Email: {/* GET email */}</label>
+      <label className='profile-item' htmlFor='email'>Email: {localStorage.email}</label>
       <label className='profile-item' htmlFor='email'>Favorite NFl team: {localStorage.nfl}</label>
       <label className='profile-item' htmlFor='email'>Favorite NCAAF team: {localStorage.col}</label>
       <input className='profile-item save' type="submit" value="SAVE" />
