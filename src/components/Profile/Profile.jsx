@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import StatDataNFL from '../../json-data/nfl-teams.json'
-import StatDataNCAAF from "../../json-data/ncaaf-teams.json";
+import { Dropdown } from 'react-dropdown-now';
+import nflTeamNames from '../../json-data/nfl-team-names.json'
+import colTeamNames from "../../json-data/ncaaf-team-names.json";
 import DropdownTeam from '../Dropdown/DropdownTeam';
 import './Profile.css';
 
@@ -12,6 +13,8 @@ import './Profile.css';
       <label className='profile-item' htmlFor="NFL Favorite:">NCAA Favorite:
         <DropdownTeam className='dropdown' statFile={StatDataNCAAF} />
       </label>
+
+      <input type="text" defaultValue = {details.fav_nfl} name="fav_nfl" id="fav_nfl" onChange={e => setDetails({...details, fav_nfl: e.target.value})} vaule={details.fav_nfl}/>
 */
 
 function Profile() {
@@ -23,6 +26,8 @@ const [details, setDetails] = useState({username: localStorage.username.substrin
             e.preventDefault();
             ChangeProfile(details);
         }
+const [nflTeam, setValue1] = useState(localStorage.nfl);
+const [colTeam, setValue2] = useState("Team Selection");
 
     function ChangeProfile(details) {
         if(details.email == ""){
@@ -32,8 +37,9 @@ const [details, setDetails] = useState({username: localStorage.username.substrin
             window.alert("Invalid email address. Requires '@'")
         }
         else{
+        window.alert(nflTeam)
             const headers = { 'Content-Type': 'application/json' }
-                    fetch('http://127.0.0.1:8000/user/info/' + localStorage.username + details.email + '/' + details.fav_nfl + '/' + details.fav_col, { headers })
+                    fetch('http://127.0.0.1:8000/user/info/' + localStorage.username + details.email + '/' + nflTeam + '/' + details.fav_col, { headers })
                     .then(response => response.text())
                     .then(data => {
                         window.alert(data);
@@ -60,7 +66,8 @@ const [details, setDetails] = useState({username: localStorage.username.substrin
       <h1>Profile</h1>
       <label className='profile-item' htmlFor="username">Username: {localStorage.username.substring(0,localStorage.username.length-1)}</label>
       <label className= 'profile-item'> <text> Email: </text><input type="text" defaultValue = {details.email} name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})} vaule={details.email}/></label>
-      <label className='profile-item' ><text> Favorite NFL team: </text> <input type="text" defaultValue = {details.fav_nfl} name="fav_nfl" id="fav_nfl" onChange={e => setDetails({...details, fav_nfl: e.target.value})} vaule={details.fav_nfl}/></label>
+      <label className='profile-item' ><text> Favorite NFL team: </text> </label>
+      <label className = 'profile-item'><DropdownTeam namesFile={nflTeamNames} changeValue={nflTeam => setValue1(nflTeam)}/> </label>
       <label className='profile-item' ><text> Favorite NCAAF team: </text> <input type="text" defaultValue = {details.fav_col} name="fav_col" id="fav_col" onChange={e => setDetails({...details, fav_col: e.target.value})} vaule={details.fav_col}/></label>
       <input className='profile-item-save' type="submit" value="UPDATE PROFILE" />
     </div>
