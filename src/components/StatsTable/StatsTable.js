@@ -6,31 +6,29 @@ import './StatsTable.css';
  * @param {Properties} props 
  *  - statFile, JSON file containing stats
  *  - teamAbrv, Team abrv used in filtering
- *  - teamYear, Year used in filter
- * @returns Stat Table - Table of stats provided by the json file
+ *  - teamSeason, Season used in filter
+ * @returns Stat Table - Table of stats provided by the team stats json file
  *  - The stat table is dynamic.  It will adjust to any properly formatted json for team statistcs.
  * Styled using StatsTable.css.
  */
 function StatsTable(props) {
 
- var statData = props.statFile;
  var abrv = props.teamAbrv;
- var year = props.teamYear;
+ var statData = props.statFile[0].stats;
+ var season = props.teamSeason;
 
-  if(props.statFile === null | statData.length == 0) {
-    return(noDataResoponse("Data Not Available"))
-  } else if (abrv === null | abrv === "" | abrv === "Team Selection") {
+  if (abrv === "Team Selection") {
     return(noDataResoponse("Awaiting Team Selection"))
   } else {
 
-    let dataFilterYear = statData.filter((teamStats) => (teamStats.year === year) )
-    if (dataFilterYear.length === 0) {
-      return(noDataResoponse("Data Not Available For This Year"))
+    let dataFilterSeason = statData.filter((teamStats) => (teamStats.season === season) )
+    if (dataFilterSeason.length === 0) {
+      return(noDataResoponse("Data Not Available For This Season"))
     }
 
-    let dataFilterAbrv = dataFilterYear.filter((teamStats) => (teamStats.abrv === abrv) )
+    let dataFilterAbrv = dataFilterSeason.filter((teamStats) => (teamStats.abrv === abrv) )
     if (dataFilterAbrv.length === 0) {
-      return(noDataResoponse("Data Not Available For This Year"))
+      return(noDataResoponse("Loading..."))
     } else {
 
       var keyList = Object.keys(dataFilterAbrv[0]);
