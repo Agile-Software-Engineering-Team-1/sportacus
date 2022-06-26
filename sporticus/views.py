@@ -276,4 +276,5 @@ def updateUserInfo(request, username, email, fav_nfl, fav_col):
         conn.commit()
     except:
         return HttpResponse("There was an error updating your profile");
+
     return HttpResponse("Update successful");

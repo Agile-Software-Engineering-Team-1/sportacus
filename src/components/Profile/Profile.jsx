@@ -28,10 +28,31 @@ const [details, setDetails] = useState({username: localStorage.username.substrin
         if(details.email == ""){
             window.alert("Update requires email.")
         }
+        else if(details.email.includes('@') == false){
+            window.alert("Invalid email address. Requires '@'")
+        }
         else{
-            window.alert(details.email)
+            const headers = { 'Content-Type': 'application/json' }
+                    fetch('http://127.0.0.1:8000/user/info/' + localStorage.username + details.email + '/' + details.fav_nfl + '/' + details.fav_col, { headers })
+                    .then(response => response.text())
+                    .then(data => {
+                        window.alert(data);
+                                            fetch('http://127.0.0.1:8000/user/info/' + localStorage.username, { headers })
+                                            .then(response => response.text())
+                                            .then(data => {
+                                            const teams = data.split(',');
+                                            teams[0] = teams[0].substring(2,teams[0].length-1);
+                                            teams[1] = teams[1].substring(2,teams[1].length-1);
+                                            teams[2] = teams[2].substring(2,teams[2].length-2);
+                                            localStorage.setItem('nfl',teams[0]);
+                                            localStorage.setItem('col',teams[1]);
+                                            localStorage.setItem('email',teams[2])
+                                            })
+                    })
         }
     }
+
+
 
   return (
     <form onSubmit={submitHandler}>
