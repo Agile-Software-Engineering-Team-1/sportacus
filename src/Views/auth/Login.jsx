@@ -56,13 +56,15 @@ class Login extends Component {
             window.alert("Username: " + localStorage.username.substring(0,localStorage.username.length-1));
             window.alert("Favorite NFL Team: " + localStorage.nfl);
             window.alert("Favorite College Team: " + localStorage.col);
-            window.location.replace("http://127.0.0.1:3000/Stats");
+
             }
             else{
             window.alert("There was an error logging in.");
             window.location.replace("http://127.0.0.1:3000/Login");
             }
+
          }, 500);
+    //window.location.replace("http://127.0.0.1:3000/Stats");
     }
 
     render() {
