@@ -233,7 +233,7 @@ def getUserInfo(request, username):
     try:
         conn = sqlite3.connect('db.sqlite3')
         cur = conn.cursor()
-        cur.execute("SELECT fav_nfl,fav_col FROM authentication_customuser WHERE username=?", (u,))
+        cur.execute("SELECT fav_nfl,fav_col,email FROM authentication_customuser WHERE username=?", (u,))
         rows = cur.fetchall()
     except:
         return HttpResponse("There was an error. Username given: %s",username)

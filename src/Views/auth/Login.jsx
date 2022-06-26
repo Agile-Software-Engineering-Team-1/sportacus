@@ -16,6 +16,7 @@ class Login extends Component {
             localStorage.removeItem('username');
             localStorage.removeItem('nfl');
             localStorage.removeItem('col');
+            localStorage.removeItem('email');
             window.alert("Logged out!")
         }
     }
@@ -40,9 +41,11 @@ class Login extends Component {
                     .then(data => {
                         const teams = data.split(',');
                         teams[0] = teams[0].substring(2,teams[0].length-1);
-                        teams[1] = teams[1].substring(2,teams[1].length-2);
+                        teams[1] = teams[1].substring(2,teams[1].length-1);
+                        teams[2] = teams[2].substring(2,teams[2].length-2);
                         localStorage.setItem('nfl',teams[0]);
                         localStorage.setItem('col',teams[1]);
+                        localStorage.setItem('email',teams[2])
                         })
                 }
             ).catch (error => {
@@ -53,10 +56,10 @@ class Login extends Component {
     handleAllSubmit(event){
         this.handleSubmitWThen(event);
         setTimeout(() => { if(localStorage.username != undefined){
-            window.alert("Username: " + localStorage.username.substring(0,localStorage.username.length-1));
-            window.alert("Favorite NFL Team: " + localStorage.nfl);
-            window.alert("Favorite College Team: " + localStorage.col);
-
+            window.alert("Username: " + localStorage.username.substring(0,localStorage.username.length-1) +
+                         "\nEmail: " + localStorage.email +
+                         "\nFavorite NFL Team: " + localStorage.nfl +
+                         "\nFavorite College Team: " + localStorage.col);
             }
             else{
             window.alert("There was an error logging in.");
