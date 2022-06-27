@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axiosInstance from "../../axiosApi";
+import '../../components/Profile/Profile.css'
 
 class Signup extends Component{
     constructor(props){
@@ -44,36 +45,38 @@ class Signup extends Component{
 
     render() {
         return (
-            <div>
-                Signup
+            <div className="profile-info">
+            <center>
+                <h1>Signup</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
+                    <label className= 'profile-item'>
                         Username:
                         <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
                         { this.state.errors.username ? this.state.errors.username : null}
                     </label>
-                    <label>
+                    <label className= 'profile-item'>
                         Email:
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange}/>
+                        <input name="email" type="text" value={this.state.email} onChange={this.handleChange}/>
                         { this.state.errors.email ? this.state.errors.email : null}
                     </label>
-                    <label>
+                    <label className= 'profile-item'>
                         Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
+                        <input name="password" type="text" value={this.state.password} onChange={this.handleChange}/>
                         { this.state.errors.password ? this.state.errors.password : null}
                     </label>
-                    <label>
+                    <label className= 'profile-item'>
                         Favorite NFL Team:
-                        <input name="fav_nfl" type="fav_nfl" value={this.state.fav_nfl} onChange={this.handleChange}/>
+                        <input name="fav_nfl" type="text" value={this.state.fav_nfl.toUpperCase()} onChange={this.handleChange}/>
                         { this.state.errors.fav_nfl ? this.state.errors.fav_nfl : null}
                     </label>
-                    <label>
+                    <label className= 'profile-item'>
                         Favorite NCAAF Team:
-                        <input name="fav_col" type="fav_col" value={this.state.fav_col} onChange={this.handleChange}/>
+                        <input name="fav_col" type="text" value={this.state.fav_col.toUpperCase()} onChange={this.handleChange}/>
                         { this.state.errors.fav_col ? this.state.errors.fav_col : null}
                     </label>
-                    <input type="submit" value="Submit"/>
+                    <input className='profile-item-save' type="submit" value="SIGN UP" />
                 </form>
+                </center>
             </div>
         )
     }
