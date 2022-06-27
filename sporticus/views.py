@@ -149,7 +149,7 @@ def buildNcaaTeamDict(ncaaf_teams, year):
     for k, v in ncaaf_teams.items():
         team = NCAAFTeam(k.upper())
     #for team in teams:
-        team_dict[f"{x}"] = {"year": f"{year}", "abrv": f"{team.abbreviation}",
+        team_dict[f"{x}"] = {"season": f"{year}", "abrv": f"{team.abbreviation}",
                              "name": f"{team.name}", "rank": f"{'NA'}", "wins": f"{team.wins}",
                              "losses": f"{team.losses}",
                              "winpcnt": f"{round((team.wins / team.games) * 100, 2)}",
@@ -243,7 +243,7 @@ def buildNcaaTeamDictMultiYear(ncaaf_teams, year):
         for season in range((int(year) - 2), (int(year) + 1)):
             #team_stats = Team(team_name=team.name, year=season)
 
-            season_dict[f"{y}"] = {"year": f"{year}", "abrv": f"{team.abbreviation}",
+            season_dict[f"{y}"] = {"season": f"{year}", "abrv": f"{team.abbreviation}",
                              "name": f"{team.name}", "rank": f"{'NA'}", "wins": f"{team.wins}",
                              "losses": f"{team.losses}",
                              "winpcnt": f"{round((team.wins / team.games) * 100, 2)}",
@@ -335,7 +335,7 @@ def buildNflSchedule(team_abrvs, year):
 
     return schedule_dict
 
-def buildNcaaSchedule(ncaaf_teams, year):
+def buildNcaaSchedule(ncaaf_abrvs, year):
     json_file_path = os.path.join(json_dir, "ncaaf-schedules.json")
     schedule_dict = {}
     schedule_list = []
@@ -344,38 +344,38 @@ def buildNcaaSchedule(ncaaf_teams, year):
         year = last_season
 
     x = 1
-    for k, v in ncaaf_teams.items():
-        team = NCAAFTeam(k.upper())
+    #for k, v in ncaaf_teams.items():
+    team = NCAAFTeam(ncaaf_abrvs)
     #for team in team_abrvs:
-        game_list = []
-        for season in range((int(year) - 2), (int(year) + 1)):
-            schedule = NCAAFSchedule(team.abbreviation, season)
-            game_dict = {}
+    game_list = []
+    for season in range((int(year) - 2), (int(year) + 1)):
+        schedule = NCAAFSchedule(team.abbreviation, season)
+        game_dict = {}
 
-            y = 1
-            for game in schedule:
+        y = 1
+        for game in schedule:
                 #field_goal_att = game.field_goals_attempted
                 #if (field_goal_att == 0):
                     #field_goal_att = 1
 
-                game_dict[f"game{y}"] = {"date": f"{game.date}", "year": f"{season}",
+            game_dict[f"game{y}"] = {"date": f"{game.date}", "season": f"{season}",
                                          "opponent": f"{game.opponent_name}",
                                          "scored": f"{game.points_for}", "allowed": f"{game.points_against}",
                                          "result": f"{game.result}", "wins": f"{game.wins}", "losses": f"{game.losses}"
                                          }
 
-                found = False
-                for dict in game_list:
-                    if (dict["date"] == game_dict[f"game{y}"]["date"] and dict["season"] == game_dict[f"game{y}"][
+            found = False
+            for dict in game_list:
+                if (dict["date"] == game_dict[f"game{y}"]["date"] and dict["season"] == game_dict[f"game{y}"][
                         "season"] and dict["opponent"] == game_dict[f"game{y}"]["opponent"]):
-                        found = True
-                if (not found):
-                    game_list.append(game_dict[f"game{y}"])
+                    found = True
+            if (not found):
+                game_list.append(game_dict[f"game{y}"])
 
-                y += 1
+            y += 1
 
-        schedule_dict[f"{x}"] = {"team": f"{team.name}", "games": game_list}
-        x += 1
+    schedule_dict[f"{x}"] = {"team": f"{team.name}", "games": game_list}
+    x += 1
 
     for sched in schedule_dict.values():
         schedule_list.append(json.dumps(sched, indent=4))
@@ -408,5 +408,6 @@ def renderNflTeamStatsAndSchedule(request, abbrv, year=last_season):
         print("Error: Team - " + team_abbrv[0] + " not found in nfl teams.")
         return HttpResponse(template.render({}, request))
         
-    return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year)
+    return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year),
                                           "ncaaf_team_data":buildNcaaSchedule(ncaaf_teams,year), "ncaaf_team_stats": buildNcaaTeamDictMultiYear(ncaaf_teams,year)}, request))
+
