@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axiosInstance from "../../axiosApi";
 import jwt_decode from "jwt-decode";
 import axios from "axios"
+import '../../components/Profile/Profile.css'
 
 class Login extends Component {
     constructor(props) {
@@ -72,19 +73,25 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                Login
+            <div className="profile-info">
+            <center>
+                <h1>Login</h1>
                 <form onSubmit={this.handleAllSubmit}>
-                    <label>
+                    <div classname = "welcome">
+                    <label className= 'profile-item'>
                         Username:
                         <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
                     </label>
-                    <label>
+                    </div>
+                    <div>
+                    <label className= 'profile-item'>
                         Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
+                        <input name="password" type="text" value={this.state.password} onChange={this.handleChange}/>
                     </label>
-                    <input type="submit" value="Submit"/>
+                    </div>
+                    <input className='profile-item-save' type="submit" value="LOGIN" />
                 </form>
+                </center>
             </div>
         )
     }
