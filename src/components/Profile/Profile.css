@@ -3,13 +3,24 @@
   padding: 10px;
   display: block;
 }
+.Dropdown2 {
+    position: center;
+    padding: 5px;
 
+}
 .profile-item {
   display: block;
   margin: 10px 0px;
-  text-decoration: underline;
+  text-decoration: none;
+  font-size: 25px;
 }
 
+.username{
+  display: block;
+  margin: 10px 0px;
+  text-decoration: none;
+  font-size: 30px;
+}
 
 .save {
   padding: 10px;
@@ -28,10 +39,10 @@
 
 }
 input[type=text] {
-  width: 10%;
+  width: 18%;
   padding: 5px 5px;
-  margin: 1px 0;
+  margin: 5px 0;
   box-sizing: border-box;
-  border: 1px solid gray;
+  border-bottom: 1px double gray;
   border-radius: 1px;
 }

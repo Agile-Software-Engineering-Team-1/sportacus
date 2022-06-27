@@ -65,10 +65,12 @@ const [colTeam, setValue2] = useState(localStorage.col);
     <div className="profile-info">
     <center>
       <h1>Profile</h1>
-      <label className='profile-item' htmlFor="username">Username: {localStorage.username.substring(0,localStorage.username.length-1)}</label>
+      <label className='username' htmlFor="username">Username: {localStorage.username.substring(0,localStorage.username.length-1)}</label>
       <label className= 'profile-item'> <text> Email: </text><input type="text" defaultValue = {details.email} name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})} vaule={details.email}/></label>
-      <label className='profile-item' ><text> Favorite NFL team: </text> <DropdownTeam namesFile={nflTeamNames} changeValue={nflTeam => setValue1(nflTeam)}/> </label>
-      <label className='profile-item' ><text> Favorite NCAAF team: </text> <DropdownTeam namesFile={nflTeamNames} changeValue={colTeam => setValue2(colTeam)}/>  </label>
+      <label className= 'profile-item'> <text> Favorite NFL team: {localStorage.nfl}</text></label>
+      <div><label className='Dropdown2' ><DropdownTeam namesFile={nflTeamNames} changeValue={nflTeam => setValue1(nflTeam)}/> </label></div>
+       <label className= 'profile-item'><text> Favorite NCAAF team: {localStorage.col}</text></label>
+      <div><label className='Dropdown2' > <DropdownTeam namesFile={nflTeamNames} changeValue={colTeam => setValue2(colTeam)}/>  </label></div>
       <input className='profile-item-save' type="submit" value="UPDATE PROFILE" />
     </center>
     </div>
