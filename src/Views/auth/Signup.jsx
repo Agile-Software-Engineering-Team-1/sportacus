@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axiosInstance from "../../axiosApi";
 import '../../components/Profile/Profile.css'
+import nflTeamNames from '../../json-data/nfl-team-names.json'
+import colTeamNames from "../../json-data/ncaaf-team-names.json";
+import DropdownTeam from '../../components/Dropdown/DropdownTeam';
 
 class Signup extends Component{
     constructor(props){
@@ -9,8 +12,8 @@ class Signup extends Component{
             username: "",
             password: "",
             email:"",
-            fav_nfl:"none",
-            fav_col:"none",
+            fav_nfl:"None",
+            fav_col:"None",
             errors:{}
         };
 
@@ -43,6 +46,8 @@ class Signup extends Component{
         }
     }
 
+
+
     render() {
         return (
             <div className="profile-info">
@@ -66,12 +71,12 @@ class Signup extends Component{
                     </label>
                     <label className= 'profile-item'>
                         Favorite NFL Team:
-                        <input name="fav_nfl" type="text" value={this.state.fav_nfl.toUpperCase()} onChange={this.handleChange}/>
+                        <div><label className='Dropdown2' ><DropdownTeam namesFile={nflTeamNames} changeValue={nflTeam => this.state.fav_nfl = nflTeam}/> </label></div>
                         { this.state.errors.fav_nfl ? this.state.errors.fav_nfl : null}
                     </label>
                     <label className= 'profile-item'>
                         Favorite NCAAF Team:
-                        <input name="fav_col" type="text" value={this.state.fav_col.toUpperCase()} onChange={this.handleChange}/>
+                        <div><label className='Dropdown2' > <DropdownTeam namesFile={nflTeamNames} changeValue={colTeam => this.state.fav_col = colTeam}/>  </label></div>
                         { this.state.errors.fav_col ? this.state.errors.fav_col : null}
                     </label>
                     <input className='profile-item-save' type="submit" value="SIGN UP" />
