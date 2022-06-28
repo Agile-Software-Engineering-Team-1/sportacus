@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
     path('nfl/<str:abbrv>/', views.renderNflTeamStatsAndSchedule, name="team_schedule"),
-    path('nfl/<str:abbrv>/<int:year>/', views.renderNflTeamStatsAndSchedule, name="team_schedule_with_year")
+    path('nfl/<str:abbrv>/<int:year>/', views.renderNflTeamStatsAndSchedule, name="team_schedule_with_year"),
     path('ncaaf/<str:abbrv>/', views.renderNcaafTeamStatsAndSchedule, name="ncaaf_team_schedule"),
     path('ncaaf/<str:abbrv>/<int:year>/', views.renderNcaafTeamStatsAndSchedule, name="ncaaf_team_schedule_with_year")
 ]

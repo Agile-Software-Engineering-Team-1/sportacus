@@ -223,7 +223,7 @@ def buildTeamDictMultiYear(teams, year) :
 
     return team_dict
 
-def buildNcaaTeamDictMultiYear(ncaaf_teams, year):
+def buildNcaaTeamDictMultiYear(ncaaf_abrvs, year):
     json_file_path = os.path.join(json_dir, "ncaaf-teams.json")
     team_dict = {}
     team_list = []
@@ -232,8 +232,11 @@ def buildNcaaTeamDictMultiYear(ncaaf_teams, year):
         year = last_season
 
     x = 1
-    for k, v in ncaaf_teams.items():
-        team = NCAAFTeam(k.upper())
+    ncaafteams = [NCAAFTeam(ncaaf_abrvs)]
+
+    for team in ncaafteams:
+    #for k, v in ncaaf_teams.items():
+        #team = NCAAFTeam(k.upper())
 
     #for team in teams:
         season_dict = {}
@@ -241,17 +244,17 @@ def buildNcaaTeamDictMultiYear(ncaaf_teams, year):
 
         y = 1
         for season in range((int(year) - 2), (int(year) + 1)):
-            #team_stats = Team(team_name=team.name, year=season)
+            team_stats = NCAAFTeam(team.abbreviation, year=season)
 
-            season_dict[f"{y}"] = {"season": f"{year}", "abrv": f"{team.abbreviation}",
-                             "name": f"{team.name}", "rank": f"{'NA'}", "wins": f"{team.wins}",
-                             "losses": f"{team.losses}",
-                             "winpcnt": f"{round((team.wins / team.games) * 100, 2)}",
-                             "passtd": f"{team.pass_touchdowns}", "rushtd": f"{team.rush_touchdowns}",
-                             "tds": f"{team.pass_touchdowns + team.rush_touchdowns}", "yards": f"{team.yards}",
-                             "trnovs": f"{team.turnovers}",
-                             "fmbls": f"{team.fumbles_lost}", "ints": f"{team.interceptions}",
-                             "ydspplay": f"{team.yards_per_play}"}
+            season_dict[f"{y}"] = {"season": f"{season}", "abrv": f"{team_stats.abbreviation}",
+                             "name": f"{team_stats.name}", "rank": f"{'NA'}", "wins": f"{team_stats.wins}",
+                             "losses": f"{team_stats.losses}",
+                             "winpcnt": f"{round((team_stats.wins / team_stats.games) * 100, 2)}",
+                             "passtd": f"{team_stats.pass_touchdowns}", "rushtd": f"{team_stats.rush_touchdowns}",
+                             "tds": f"{team_stats.pass_touchdowns + team_stats.rush_touchdowns}", "yards": f"{team_stats.yards}",
+                             "trnovs": f"{team_stats.turnovers}",
+                             "fmbls": f"{team_stats.fumbles_lost}", "ints": f"{team_stats.interceptions}",
+                             "ydspplay": f"{team_stats.yards_per_play}"}
 
             y += 1
 
@@ -402,24 +405,26 @@ def index(request):
 #Triggered when the /nfl/<team_abbrv>/<year>/ endpoint is fetched -> http://127.0.0.1:8000/nfl/phi/2021
 def renderNflTeamStatsAndSchedule(request, abbrv, year=last_season):
     template = loader.get_template("index.html")
-    
     team_abbrv = [abbrv.strip().upper()]
+
     if(team_abbrv[0] not in team_abrvs):
         print("Error: Team - " + team_abbrv[0] + " not found in nfl teams.")
         return HttpResponse(template.render({}, request))
         
-    return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year),
-                                          "ncaaf_team_data":buildNcaaSchedule(ncaaf_teams,year), "ncaaf_team_stats": buildNcaaTeamDictMultiYear(ncaaf_teams,year)}, request))
+    return HttpResponse(template.render({"team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year)},request))
 
 
 def renderNcaafTeamStatsAndSchedule(request, abbrv, year=last_season):
     template = loader.get_template("index.html")
-
     team_abbrv = [abbrv.strip().upper()]
+
     if (team_abbrv[0] not in team_abrvs):
         print("Error: Team - " + team_abbrv[0] + " not found in nfl teams.")
         return HttpResponse(template.render({}, request))
 
     return HttpResponse(template.render(
-        {"ncaaf_team_data": buildNcaaSchedule(ncaaf_teams, year),
-         "ncaaf_team_stats": buildNcaaTeamDictMultiYear(ncaaf_teams, year)}, request))
+        {"ncaaf_team_data": buildNcaaSchedule(team_abbrv, year),
+         "ncaaf_team_stats": buildNcaaTeamDictMultiYear(team_abbrv, year)}, request))
+
+if __name__ == '__main__':
+    buildNcaaTeamDictMultiYear('RUTGERS', '2021')
