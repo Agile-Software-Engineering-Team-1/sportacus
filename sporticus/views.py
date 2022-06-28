@@ -426,5 +426,3 @@ def renderNcaafTeamStatsAndSchedule(request, abbrv, year=last_season):
         {"ncaaf_team_data": buildNcaaSchedule(team_abbrv, year),
          "ncaaf_team_stats": buildNcaaTeamDictMultiYear(team_abbrv, year)}, request))
 
-if __name__ == '__main__':
-    buildNcaaTeamDictMultiYear('RUTGERS', '2021')
