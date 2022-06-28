@@ -411,3 +411,15 @@ def renderNflTeamStatsAndSchedule(request, abbrv, year=last_season):
     return HttpResponse(template.render({ "team_data" : buildNflSchedule(team_abbrv, year), "team_stats": buildTeamDictMultiYear(team_abbrv, year),
                                           "ncaaf_team_data":buildNcaaSchedule(ncaaf_teams,year), "ncaaf_team_stats": buildNcaaTeamDictMultiYear(ncaaf_teams,year)}, request))
 
+
+def renderNcaafTeamStatsAndSchedule(request, abbrv, year=last_season):
+    template = loader.get_template("index.html")
+
+    team_abbrv = [abbrv.strip().upper()]
+    if (team_abbrv[0] not in team_abrvs):
+        print("Error: Team - " + team_abbrv[0] + " not found in nfl teams.")
+        return HttpResponse(template.render({}, request))
+
+    return HttpResponse(template.render(
+        {"ncaaf_team_data": buildNcaaSchedule(ncaaf_teams, year),
+         "ncaaf_team_stats": buildNcaaTeamDictMultiYear(ncaaf_teams, year)}, request))
