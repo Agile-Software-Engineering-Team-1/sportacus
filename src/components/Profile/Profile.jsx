@@ -37,7 +37,6 @@ const [colTeam, setValue2] = useState(localStorage.col);
             window.alert("Invalid email address. Requires '@'")
         }
         else{
-        window.alert(nflTeam)
             const headers = { 'Content-Type': 'application/json' }
                     fetch('http://127.0.0.1:8000/user/info/' + localStorage.username + details.email + '/' + nflTeam + '/' + colTeam, { headers })
                     .then(response => response.text())
