@@ -1,0 +1,30 @@
+.stats-container {
+  margin: 0 auto;
+  padding: 20px 0px;
+  width: 70%;
+  display: block;
+}
+
+h1 {
+  font-family: "Arial";
+  color: rgb(40, 41, 41);
+  position: relative;
+  
+}
+
+.childSC {
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  display: inline-block;
+
+}
+
+  .stats-img {
+    display: block;
+    float: left;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    height: auto
+  }
