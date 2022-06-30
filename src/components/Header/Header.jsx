@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import "./Header.css";
 import logo from '../../assets/sportacus_temp_logo.svg';
-import "../../../node_modules/bootstrap/dist/css/bootstrap.css"
+import "../../assets/bootstrap/dist/css/bootstrap.css"
 
 
 function Header() {
