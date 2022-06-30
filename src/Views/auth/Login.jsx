@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axiosInstance from "../../axiosApi";
 import jwt_decode from "jwt-decode";
 import axios from "axios"
+import '../../components/Profile/Profile.css'
 
 class Login extends Component {
     constructor(props) {
@@ -16,6 +17,7 @@ class Login extends Component {
             localStorage.removeItem('username');
             localStorage.removeItem('nfl');
             localStorage.removeItem('col');
+            localStorage.removeItem('email');
             window.alert("Logged out!")
         }
     }
@@ -40,9 +42,11 @@ class Login extends Component {
                     .then(data => {
                         const teams = data.split(',');
                         teams[0] = teams[0].substring(2,teams[0].length-1);
-                        teams[1] = teams[1].substring(2,teams[1].length-2);
+                        teams[1] = teams[1].substring(2,teams[1].length-1);
+                        teams[2] = teams[2].substring(2,teams[2].length-2);
                         localStorage.setItem('nfl',teams[0]);
                         localStorage.setItem('col',teams[1]);
+                        localStorage.setItem('email',teams[2])
                         })
                 }
             ).catch (error => {
@@ -53,35 +57,43 @@ class Login extends Component {
     handleAllSubmit(event){
         this.handleSubmitWThen(event);
         setTimeout(() => { if(localStorage.username != undefined){
-            window.alert("Username: " + localStorage.username.substring(0,localStorage.username.length-1));
-            window.alert("Favorite NFL Team: " + localStorage.nfl);
-            window.alert("Favorite College Team: " + localStorage.col);
-
+            window.alert("Username: " + localStorage.username.substring(0,localStorage.username.length-1) +
+                         "\nEmail: " + localStorage.email +
+                         "\nFavorite NFL Team: " + localStorage.nfl +
+                         "\nFavorite College Team: " + localStorage.col);
             }
             else{
             window.alert("There was an error logging in.");
-            window.location.replace("http://127.0.0.1:3000/Login");
+            //window.location.replace("http://127.0.0.1:3000/Login");
             }
 
          }, 500);
+
+
     //window.location.replace("http://127.0.0.1:3000/Stats");
     }
 
     render() {
         return (
-            <div>
-                Login
+            <div className="profile-info">
+            <center>
+                <h1>Login</h1>
                 <form onSubmit={this.handleAllSubmit}>
-                    <label>
+                    <div classname = "welcome">
+                    <label className= 'profile-item'>
                         Username:
                         <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
                     </label>
-                    <label>
+                    </div>
+                    <div>
+                    <label className= 'profile-item'>
                         Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
+                        <input name="password" type="text" value={this.state.password} onChange={this.handleChange}/>
                     </label>
-                    <input type="submit" value="Submit"/>
+                    </div>
+                    <input className='profile-item-save' type="submit" value="LOGIN" />
                 </form>
+                </center>
             </div>
         )
     }
