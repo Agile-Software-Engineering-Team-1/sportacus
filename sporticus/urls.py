@@ -25,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
     path('nfl/<str:abbrv>/', views.renderNflTeamStatsAndSchedule, name="team_schedule"),
-    path('nfl/<str:abbrv>/<int:year>/', views.renderNflTeamStatsAndSchedule, name="team_schedule_with_year")
+    path('nfl/<str:abbrv>/<int:year>/', views.renderNflTeamStatsAndSchedule, name="team_schedule_with_year"),
+    path('user/info/<str:username>/', views.getUserInfo, name="user_Info")
 ]

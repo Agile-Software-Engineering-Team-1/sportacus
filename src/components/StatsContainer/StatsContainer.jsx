@@ -40,6 +40,7 @@ function StatsContainer() {
     fetch(`http://localhost:8000/${valueSport.toLowerCase()}/${valueTeam}/2021/`)
   }
 
+  console.log("test " + getTeamName())
   return (
     <div className="stats-container">
       <div className="childSC">
@@ -47,9 +48,10 @@ function StatsContainer() {
         <DropdownTeam namesFile={TeamNames} changeValue={valueTeam => setValue1(valueTeam)}/>
         <DropdownSeason changeValue={valueSeason => setValue3(valueSeason)}/>
       </div>
-      <div className="childSC"><h1>STATISTICS</h1></div>
+      <div className="childSC"><h1>{getTeamName()} {currentSport} {valueSeason}</h1></div>
+      <div className="childSC"><h3>STATISTICS</h3></div>
       <div className="childSC"><StatsTable teamAbrv={valueTeam} teamSeason={valueSeason} statFile={StatData}/></div>
-      <h1 className="childSC">SCHEDULE</h1>
+      <h3 className="childSC">SCHEDULE</h3>
       <div className="childSC"><ScheduleTable teamAbrv={valueTeam} teamSeason={valueSeason} statFile={ScheduleData}/></div>
     </div>
   );
@@ -79,20 +81,31 @@ function valuesUpdatedSport(valueSport) {
   if (valueSport !== currentSport) {
     currentSport = valueSport;
     if (currentSport === "NFL") {
+      currentTeam = "";
       StatData = StatDataNFL;
       ScheduleData = ScheduleDataNFL;
       TeamNames = TeamNamesNFL;
     } else if (currentSport === "NCAAF") {
+      currentTeam = "";
       StatData = StatDataNCAAF;
       ScheduleData = ScheduleDataNCAAF;
       TeamNames = TeamNamesNCAAF;
     }
 
-
-
     return true;
   }
   return false;
+}
+
+function getTeamName() {
+  if (TeamNames !== null & currentTeam !== null) {
+    for (var i = 0; i < TeamNames[0].abrv.length; ++i) {
+     if (currentTeam === TeamNames[0].abrv[i]) {
+       return TeamNames[1].name[i] + " -";
+     }
+    }
+  }
+  return "";
 }
 
 export default StatsContainer;
