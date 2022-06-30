@@ -7,7 +7,7 @@ import Login from '../../Views/auth/Login'
 import Signup from '../../Views/auth/Signup'
 import Logout from '../../Views/auth/Logout'
 import Profile from '../Profile/Profile'
-
+import About from '../About/About'
 
 import {
   BrowserRouter as Router,
@@ -29,7 +29,8 @@ function App() {
           <Route exact path="/Signup" element={<Signup/>}/>
           <Route exact path="/Logout" element={<Logout/>}/>
           <Route exact path="/Profile" element={<Profile/>}/>
-        </Routes>
+          <Route exact path="/About" element={<About/>}/>
+	</Routes>
       </Router>
     </div>
   );
