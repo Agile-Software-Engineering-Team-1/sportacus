@@ -24,7 +24,7 @@ function Header() {
             <ul className='main-nav'>
 	      <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Stats';}}>Stats</button></li>
               <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/About';}}>About</button></li>
-              <li className='push'><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Profile';}}>Profile</button></li>
+              <li className='push'><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Profile';}}>{localStorage.username.substring(0,localStorage.username.length-1)}</button></li>
               <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Logout';}}>Logout</button></li>
             </ul>
           ) : (
