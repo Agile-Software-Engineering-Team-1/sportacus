@@ -29,7 +29,7 @@ function Header() {
             </ul>
           ) : (
             <ul className='main-nav'>
-              <li><button class="outline-primary" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Stats';}}>Stats</button></li>
+              <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Stats';}}>Stats</button></li>
               <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/About';}}>About</button></li>
 	      <li className='push'><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Login';}}>Login</button></li>
 	      <li><button class="nav-link" type="button" onClick={(e) => {e.preventDefault(); window.location.href='/Signup';}}>Sign Up</button></li>
