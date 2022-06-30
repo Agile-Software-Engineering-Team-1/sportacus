@@ -64,10 +64,12 @@ class Login extends Component {
             }
             else{
             window.alert("There was an error logging in.");
-            window.location.replace("http://127.0.0.1:3000/Login");
+            //window.location.replace("http://127.0.0.1:3000/Login");
             }
 
          }, 500);
+
+
     //window.location.replace("http://127.0.0.1:3000/Stats");
     }
 
