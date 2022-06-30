@@ -1,0 +1,58 @@
+[
+{
+    "team": "CAR",
+    "stats": [
+        {
+            "season": "2019",
+            "abrv": "CAR",
+            "name": "Carolina Panthers",
+            "rank": "20",
+            "wins": "5",
+            "losses": "11",
+            "winpcnt": "31.25",
+            "passtd": "17",
+            "rushtd": "20",
+            "tds": "37",
+            "yards": "5469",
+            "trnovs": "35",
+            "fmbls": "14",
+            "ints": "21",
+            "ydspplay": "5.1"
+        },
+        {
+            "season": "2020",
+            "abrv": "CAR",
+            "name": "Carolina Panthers",
+            "rank": "24",
+            "wins": "5",
+            "losses": "11",
+            "winpcnt": "31.25",
+            "passtd": "16",
+            "rushtd": "19",
+            "tds": "35",
+            "yards": "5592",
+            "trnovs": "21",
+            "fmbls": "5",
+            "ints": "16",
+            "ydspplay": "5.6"
+        },
+        {
+            "season": "2021",
+            "abrv": "CAR",
+            "name": "Carolina Panthers",
+            "rank": "29",
+            "wins": "5",
+            "losses": "12",
+            "winpcnt": "29.41",
+            "passtd": "14",
+            "rushtd": "17",
+            "tds": "31",
+            "yards": "5081",
+            "trnovs": "29",
+            "fmbls": "8",
+            "ints": "21",
+            "ydspplay": "4.6"
+        }
+    ]
+}
+]

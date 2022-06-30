@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>
+NFL Teams
+</h1>
+<ul>
+ {% for key, value in team_data.items %}
+ <li>
+    {{key}}: {{value}}
+ </li>
+ {% endfor %}
+</ul>
+{% endblock %}
